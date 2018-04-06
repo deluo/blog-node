@@ -1,5 +1,5 @@
 var mongoose =  require("mongoose");
-mongoose.connect('mongodb://localhost/users');
+mongoose.connect('mongodb://localhost/myblog');
 var db = mongoose.connection;
 
 var userSchema = {
