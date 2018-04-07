@@ -12,4 +12,8 @@ router.get("/getListByDate/:createTime",Blog.getListByDate);
 
 router.post("/postBlog",Blog.postBlog);
 
+router.get("/groupByDate",Blog.getDateGroup);
+
+router.get("/groupByTags",Blog.getTagsGroup);
+
 module.exports = router;

@@ -52,6 +52,39 @@ class Blogs{
         }
         BlogModel.create(newBlog);
     }
+
+    getDateGroup(req,res,next){
+        BlogModel.aggregate([
+            {
+                $project:{
+                    createTime:{year: { $year: "$createTime" }, month: { $month: "$createTime" }}
+                }
+            },
+            {
+                $group:{
+                    _id:"$createTime",
+                    blogCount:{$sum:1}
+                }
+            }
+        ],function(err,doc){
+            if(err){ return res.send(err)}
+            res.json(doc);
+        });
+    }
+
+    getTagsGroup(req,res,next){
+        BlogModel.aggregate([
+            {
+                $group:{
+                    _id:"$tags",
+                    blogCount:{$sum:1}
+                }
+            }
+        ],function(err,doc){
+            if(err){return res.send(err)}
+            res.json(doc);
+        })
+    }
 }
 
 module.exports = new Blogs();
