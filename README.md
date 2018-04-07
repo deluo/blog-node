@@ -1,8 +1,8 @@
 # blog-node
-> express4.x + nodejs + mongodb 搭建个人博客api接口
+> express4.x + Node.js + mongoose 个人博客接口
 
 #安装依赖
 >npm install
 
 #运行
->npm start
+>node app.js
