@@ -52,7 +52,25 @@ class Blogs{
         }
         BlogModel.create(newBlog);
     }
-
+    deleteBlog(req,res,next){
+        BlogModel.findByIdAndRemove(req.params.id,function(err,doc){
+            if(err){return res.send(err)}
+            res.send({status:1,message:"删除成功"});
+        })
+    }
+    updateBlog(req,res,next){
+        const updateBlog = {
+            'title':req.body.title,
+            'content':req.body.content,
+            'comments':[],
+            'author':req.body.author,
+            'tags':req.body.tags
+        }
+        BlogModel.findOneAndUpdate({_id:req.params.id},updateBlog,function(err,doc){
+            if(err){return res.send(err)}
+            res.send({status:1,message:"更新成功"});
+        })
+    }
     getDateGroup(req,res,next){
         BlogModel.aggregate([
             {

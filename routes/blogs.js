@@ -12,6 +12,10 @@ router.get("/getListByDate/:createTime",Blog.getListByDate);
 
 router.post("/postBlog",Blog.postBlog);
 
+router.delete("/deleteBlog/:id",Blog.deleteBlog);
+
+router.put("/updateBlog/:id",Blog.updateBlog);
+
 router.get("/groupByDate",Blog.getDateGroup);
 
 router.get("/groupByTags",Blog.getTagsGroup);
