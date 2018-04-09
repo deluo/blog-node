@@ -8,7 +8,7 @@
 
 ### 博客管理
 [4.获取所有博客](#4获取所有博客)<br/>
-[5.获取博客详细](#5获取博客详细)<br/>
+[5.获取博客内容](#5获取博客内容)<br/>
 [6.获取博客列表根据标签](#6获取博客列表根据标签)<br/>
 [7.获取博客列表根据日期](#7获取博客列表根据日期)<br/>
 [8.发布博客](#8发布博客)<br/>
@@ -49,3 +49,96 @@ http://localhost:8080/users/all
 ```
 GET
 ```
+
+#### 4.获取所有博客
+##### 请求URL
+```
+http://localhost:8080/blogs/all
+```
+##### 请求方式
+```
+GET
+```
+
+#### 5.获取博客内容
+##### 请求URL
+```
+http://localhost:8080/blogs/getOne/:id
+```
+##### 请求方式
+```
+GET
+```
+
+#### 6.获取博客列表根据标签
+##### 请求URL
+```
+http://localhost:8080/blogs/getListByTag?tags=随笔
+```
+##### 请求方式
+```
+GET
+```
+
+#### 7.获取博客列表根据日期
+##### 请求URL
+```
+http://localhost:8080/blogs/getListByDate/:createTime
+```
+##### 请求方式
+```
+GET
+```
+
+#### 8.发布博客
+##### 请求URL
+```
+http://localhost:8080/blogs/postBlog
+```
+##### 请求方式
+```
+POST
+```
+
+#### 9.删除博客
+##### 请求URL
+```
+http://localhost:8080/blogs/deleteBlog/:id
+```
+##### 请求方式
+```
+DELETE
+```
+
+#### 10.编辑博客
+##### 请求URL
+```
+http://localhost:8080/blogs/updateBlog/:id
+```
+##### 请求方式
+```
+PUT
+```
+
+#### 11.博客分组根据日期
+##### 请求URL
+```
+http://localhost:8080/blogs/groupByDate
+```
+##### 请求方式
+```
+GET
+```
+
+#### 12.博客分组根据标签
+##### 请求URL
+```
+http://localhost:8080/blogs/groupByTags
+```
+##### 请求方式
+```
+GET
+```
+
+
+
