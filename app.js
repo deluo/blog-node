@@ -4,14 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
 var logger = require('morgan');
+var config = require('./config');
 
 var router = require('./routes/index');
 var app = express();
 
-var port = process.env.PORT || 8080;
 //监听端口
-app.listen(port);
-console.log("begin with this port:"+port);
+app.listen(config.port);
+console.log("server begin with this port:"+config.port);
 
 router(app);
 
