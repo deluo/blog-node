@@ -8,7 +8,7 @@ router.get("/getOne/:id",Blog.getBlogById);
 
 router.get("/getListByTag",Blog.getListByTag);
 
-router.get("/getListByDate/:createTime",Blog.getListByDate);
+router.get("/getListByDate",Blog.getListByDate);
 
 router.post("/postBlog",Blog.postBlog);
 

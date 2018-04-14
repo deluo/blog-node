@@ -53,12 +53,18 @@ GET
 #### 4.获取所有博客
 ##### 请求URL
 ```
-http://localhost:8080/blogs/all
+http://localhost:8080/blogs/all?pageSize=2&pageNo=1
 ```
 ##### 请求方式
 ```
 GET
 ```
+
+##### 参数类型
+|参数|类型|说明|
+|:----|:----|:----|
+|pageSize|int|每页记录数 |
+|pageNo|int|当前页数|
 
 #### 5.获取博客内容
 ##### 请求URL
@@ -73,22 +79,35 @@ GET
 #### 6.获取博客列表根据标签
 ##### 请求URL
 ```
-http://localhost:8080/blogs/getListByTag?tags=随笔
+http://localhost:8080/blogs/getListByTag?tags=随笔&pageSize=2&pageNo=1
 ```
 ##### 请求方式
 ```
 GET
 ```
 
+##### 参数类型
+|参数|类型|说明|
+|:----|:----|:----|
+|tags|string|博客标签|
+|pageSize|int|每页记录数 |
+|pageNo|int|当前页数|
+
 #### 7.获取博客列表根据日期
 ##### 请求URL
 ```
-http://localhost:8080/blogs/getListByDate/:createTime
+http://localhost:8080/blogs/getListByDate?createTime&pageSize=2&pageNo=1
 ```
 ##### 请求方式
 ```
 GET
 ```
+##### 参数类型
+|参数|类型|说明|
+|:----|:----|:----|
+|createTime|string|博客创建日期|
+|pageSize|int|每页记录数 |
+|pageNo|int|当前页数|
 
 #### 8.发布博客
 ##### 请求URL

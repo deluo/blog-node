@@ -6,12 +6,16 @@ class Blogs{
 
     }
     getAllBlogs(req,res,next){
-        BlogModel.find({},function(err,doc){
-            if(err){
-                return res.send(err);
+        let pageNo = parseInt(req.query.pageNo);
+        let pageSize = parseInt(req.query.pageSize);
+        BlogModel.find({}).limit(pageSize).skip((pageNo-1)*pageSize).sort({'createTime':-1}).exec(
+            function(err,doc){
+                if(err){
+                    return res.send({status:0,err:err});
+                }
+                res.json(doc);
             }
-            res.json(doc);
-        });
+        );
     }
     getBlogById(req,res,next){
         BlogModel.findById({_id:req.params.id},function(err,doc){
@@ -22,24 +26,32 @@ class Blogs{
         });
     }
     getListByTag(req,res,next){
-        BlogModel.find({tags:req.query.tags},function(err,doc){
-            if(err){
-                return res.send(err);
+        let pageNo = parseInt(req.query.pageNo) || 1;
+        let pageSize = parseInt(req.query.pageSize) || 10;
+        BlogModel.find({tags:req.query.tags}).limit(pageSize).skip((pageNo-1)*pageSize).sort({'createTime':-1}).exec(
+            function(err,doc){
+                if(err){
+                    return res.send({status:0,err:err});
+                }
+                res.json(doc);
             }
-            res.json(doc);
-        });
+        );
     }
     getListByDate(req,res,next){
-        var createMonth = moment(req.params.createTime).format();
-        var firstDay = moment(createMonth).startOf("month").format("YYYY-MM-DD");
-        var lastDay = moment(createMonth).endOf("month").format("YYYY-MM-DD");
-        
-        BlogModel.find({createTime:{"$gte":firstDay,"$lt":lastDay}},function(err,doc){
-            if(err){
-                return res.send(err);
+        let createMonth = moment(req.query.createTime).format();
+        let firstDay = moment(createMonth).startOf("month").format("YYYY-MM-DD");
+        let lastDay = moment(createMonth).endOf("month").format("YYYY-MM-DD");
+
+        let pageNo = parseInt(req.query.pageNo) || 1;
+        let pageSize = parseInt(req.query.pageSize) || 10;
+        BlogModel.find({createTime:{"$gte":firstDay,"$lt":lastDay}}).limit(pageSize).skip((pageNo-1)*pageSize).sort({'createTime':-1}).exec(
+            function(err,doc){
+                if(err){
+                    return res.send({status:0,err:err});
+                }
+                res.json(doc);
             }
-            res.json(doc);
-        });
+        );
     }
     postBlog(req,res,next){
         const newBlog = {
@@ -54,7 +66,7 @@ class Blogs{
     }
     deleteBlog(req,res,next){
         BlogModel.findByIdAndRemove(req.params.id,function(err,doc){
-            if(err){return res.send(err)}
+            if(err){return res.send({status:0,err:err})}
             res.send({status:1,message:"删除成功"});
         })
     }
