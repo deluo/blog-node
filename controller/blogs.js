@@ -1,5 +1,6 @@
 var BlogModel = require("../models/blogs");
 var moment = require('moment');
+var marked = require('marked');
 
 class Blogs{
     constructor(){
@@ -13,16 +14,16 @@ class Blogs{
                 if(err){
                     return res.send({status:0,err:err});
                 }
-                res.json(doc);
+                res.json(Blogs.mdToHtml(doc,['content','title']));
             }
         );
     }
     getBlogById(req,res,next){
         BlogModel.findById({_id:req.params.id},function(err,doc){
             if(err){
-                return res.send(err);
+                return res.send({status:0,err:err});
             }
-            res.json(doc);
+            res.json(Blogs.mdToHtml(doc,['content','title']));
         });
     }
     getListByTag(req,res,next){
@@ -33,7 +34,7 @@ class Blogs{
                 if(err){
                     return res.send({status:0,err:err});
                 }
-                res.json(doc);
+                res.json(Blogs.mdToHtml(doc,['content','title']));
             }
         );
     }
@@ -49,7 +50,7 @@ class Blogs{
                 if(err){
                     return res.send({status:0,err:err});
                 }
-                res.json(doc);
+                res.json(Blogs.mdToHtml(doc,['content','title']));
             }
         );
     }
@@ -114,6 +115,36 @@ class Blogs{
             if(err){return res.send(err)}
             res.json(doc);
         })
+    }
+
+    static mdToHtml(mdDoc,attrArray){
+        marked.setOptions({
+            renderer: new marked.Renderer(),
+            gfm: true,
+            tables: true,
+            breaks: false,
+            pedantic: false,
+            sanitize: true,
+            smartLists: true,
+            smartypants: false
+        });
+        try {
+            if(Array.isArray(mdDoc)){
+                mdDoc.forEach((item,index) => {
+                    attrArray.forEach((attr,i)=>{
+                        item[attr] = marked(item[attr]);
+                    });
+                });
+            }else{
+                attrArray.forEach((attr,i)=>{
+                    mdDoc[attr] = marked(mdDoc[attr]);
+                });
+            }
+            
+        } catch (error) {
+            return mdDoc;
+        }
+        return mdDoc;
     }
 }
 

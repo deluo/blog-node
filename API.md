@@ -96,7 +96,7 @@ GET
 #### 7.获取博客列表根据日期
 ##### 请求URL
 ```
-http://localhost:8080/blogs/getListByDate?createTime&pageSize=2&pageNo=1
+http://localhost:8080/blogs/getListByDate?createTime=2018-04&pageSize=2&pageNo=1
 ```
 ##### 请求方式
 ```
