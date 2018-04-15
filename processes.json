@@ -1,0 +1,18 @@
+{
+    "apps" : [{
+        "name" : "blogAPI",
+        "script": "./app.js",
+        "watch":[
+            "bin",
+            "routes"
+        ],
+        "ignore_watch" : [
+            "node_modules", 
+            "logs",
+            "public"
+        ],
+        "error_file":"./logs/app-err.log",
+        "out_file":"./logs/app-out.log",
+        "log_date_format":"YYYY-MM-DD HH:mm Z"
+        }]
+}

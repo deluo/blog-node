@@ -8,17 +8,22 @@ class Users{
     }
     login(req,res,next) {
         var encryptPwd = Users.encryptFn(req.body.password);
-        var query = UserModel.where({name:req.body.name});
-        query.findOne(function(err,userModel){
+        //var query = UserModel.where({name:req.body.name});
+        UserModel.findOne({name:req.body.name},function(err,userModel){
             if(err){
-                res.send("该用户不存在")
-                return;
+                return res.send({"status":0,"err":err});            
             }
-            if(userModel && userModel.password === encryptPwd){
-                res.send("登录成功");
-                return;
-            }
-            res.send("密码错误");
+			try{
+				if(!userModel){
+					return res.send({"status":0,"err":"该用户不存在"});
+				}
+				else if(userModel.password === encryptPwd){
+					return res.send({"status":1,"err":"登录成功"});
+				}
+			}catch(err){
+				res.send({"status":0,"err":err});
+			}
+            res.send({"status":0,"err":"密码错误"});
         });
     }
     register(req,res,next){
